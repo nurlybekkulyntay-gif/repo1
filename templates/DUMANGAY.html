@@ -1,29 +1,115 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gemini Chatbot</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap');
+    :root {
+      --bg-1: #1f2937;
+      --bg-2: #0ea5a4;
+      --panel: #ffffff;
+      --accent: #0ea5a4;
+      --accent-2: #0f766e;
+      --text: #0f172a;
+      --muted: #e5e7eb;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 100vh; display: flex; justify-content: center; align-items: center; }
-    .container { width: 500px; height: 600px; background: white; border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); display: flex; flex-direction: column; }
-    .header { background: #667eea; color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center; }
-    .chat-box { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column;
-    gap: 10px; }
-    .message { padding: 10px 15px; border-radius: 8px; max-width: 80%; word-wrap: break-word; }
-    .user-msg { background: #667eea; color: white; align-self: flex-end; }
-    .bot-msg { background: #f0f0f0; color: black; align-self: flex-start; }
-    .input-area { display: flex; padding: 15px; gap: 10px; border-top: 1px solid #ddd; }
-    input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; }
-    button { padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
-    button:hover { background: #764ba2; }
+    body {
+      font-family: 'Rubik', 'Noto Sans', sans-serif;
+      background: radial-gradient(1200px 600px at 10% 10%, #22d3ee 0%, rgba(34,211,238,0) 55%),
+                  linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+    .page-title {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .container {
+      width: 100%;
+      max-width: 560px;
+      height: 680px;
+      background: var(--panel);
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .header {
+      background: var(--accent);
+      color: white;
+      padding: 18px 20px;
+      text-align: center;
+    }
+    .chat-box {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #f8fafc;
+    }
+    .message {
+      padding: 10px 14px;
+      border-radius: 10px;
+      max-width: 80%;
+      word-wrap: break-word;
+      line-height: 1.4;
+      font-size: 14px;
+    }
+    .user-msg { background: var(--accent); color: white; align-self: flex-end; }
+    .bot-msg { background: #ffffff; color: var(--text); align-self: flex-start; border: 1px solid var(--muted); }
+    .input-area { display: flex; padding: 14px; gap: 10px; border-top: 1px solid var(--muted); background: #ffffff; }
+    input {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid var(--muted);
+      border-radius: 10px;
+      font-size: 14px;
+      outline: none;
+    }
+    input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(14,165,164,0.15); }
+    button {
+      padding: 12px 18px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+    button:hover { background: var(--accent-2); }
+    @media (max-width: 600px) {
+      body { padding: 12px; align-items: flex-start; }
+      .page-title { position: static; margin-bottom: 10px; text-align: center; }
+      .container {
+        height: calc(100vh - 120px);
+        max-width: 100%;
+        border-radius: 14px;
+      }
+      .header { padding: 14px 16px; }
+      .chat-box { padding: 16px; }
+      .input-area { padding: 10px; gap: 8px; }
+      button { padding: 10px 14px; }
+    }
   </style>
 </head>
 <body>
-  <div>
-    <h1>nurlybekkkkk</h1>
-  </div>
+  <div class="page-title">Nurlybek</div>
   <div class="container">
     <div class="header"><h2>Gemini Chatbot</h2></div>
     <div class="chat-box" id="chatBox"></div>
